@@ -1,0 +1,1764 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دليل نظام حجز المواعيد - Clinikio | ميسان</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            line-height: 1.8;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Header */
+        .header {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            color: #667eea;
+            font-size: 3em;
+            margin-bottom: 10px;
+        }
+        
+        .header .subtitle {
+            color: #764ba2;
+            font-size: 1.5em;
+            margin-bottom: 20px;
+        }
+        
+        .header .company {
+            color: #666;
+            font-size: 1.2em;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 2px solid #f0f0f0;
+        }
+        
+        /* Navigation */
+        .nav-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            flex-wrap: wrap;
+        }
+        
+        .nav-tab {
+            flex: 1;
+            min-width: 200px;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: bold;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+        
+        .nav-tab:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.5);
+        }
+        
+        .nav-tab.active {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+        
+        /* Content */
+        .content-section {
+            display: none;
+            background: white;
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+            margin-bottom: 30px;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        
+        .content-section.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .section-title {
+            font-size: 2.5em;
+            color: #667eea;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid #f5576c;
+        }
+        
+        .section-subtitle {
+            font-size: 2em;
+            color: #764ba2;
+            margin: 40px 0 20px 0;
+        }
+        
+        /* Steps */
+        .steps-container {
+            margin: 30px 0;
+        }
+        
+        .step {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 30px;
+            margin: 20px 0;
+            border-radius: 15px;
+            border-right: 5px solid #667eea;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .step-number {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            width: 50px;
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            border-radius: 50%;
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-left: 20px;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .step-title {
+            font-size: 1.8em;
+            color: #333;
+            margin: 20px 0 10px 0;
+            font-weight: bold;
+        }
+        
+        .step-content {
+            font-size: 1.2em;
+            color: #555;
+            line-height: 1.8;
+        }
+        
+        .step-content ul {
+            margin: 15px 0 15px 30px;
+        }
+        
+        .step-content li {
+            margin: 10px 0;
+            padding-right: 10px;
+        }
+        
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 30px 0;
+        }
+        
+        .feature-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            border-top: 4px solid #667eea;
+            transition: all 0.3s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+        }
+        
+        .feature-icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+        }
+        
+        .feature-title {
+            font-size: 1.5em;
+            color: #667eea;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        
+        .feature-desc {
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        /* Screenshots */
+        .screenshot {
+            width: 100%;
+            max-width: 800px;
+            margin: 30px auto;
+            display: block;
+            border-radius: 15px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+            border: 5px solid #667eea;
+        }
+        
+        .screenshot-placeholder {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2em;
+            margin: 30px 0;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        }
+        
+        /* Alert boxes */
+        .alert {
+            padding: 25px;
+            margin: 25px 0;
+            border-radius: 10px;
+            border-right: 5px solid;
+        }
+        
+        .alert-info {
+            background: #e3f2fd;
+            border-color: #2196F3;
+            color: #0d47a1;
+        }
+        
+        .alert-warning {
+            background: #fff3e0;
+            border-color: #ff9800;
+            color: #e65100;
+        }
+        
+        .alert-success {
+            background: #e8f5e9;
+            border-color: #4caf50;
+            color: #1b5e20;
+        }
+        
+        .alert-danger {
+            background: #ffebee;
+            border-color: #f44336;
+            color: #b71c1c;
+        }
+        
+        /* Tables */
+        .info-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .info-table th,
+        .info-table td {
+            padding: 20px;
+            text-align: right;
+            border: 1px solid #ddd;
+        }
+        
+        .info-table th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            font-size: 1.2em;
+        }
+        
+        .info-table tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        .info-table tr:hover {
+            background: #e3f2fd;
+        }
+        
+        /* Code blocks */
+        .code-block {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+        
+        /* FAQ */
+        .faq-item {
+            background: #f8f9fa;
+            padding: 25px;
+            margin: 15px 0;
+            border-radius: 10px;
+            border-right: 4px solid #667eea;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .faq-item:hover {
+            background: #e3f2fd;
+            transform: translateX(-5px);
+        }
+        
+        .faq-question {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .faq-answer {
+            font-size: 1.1em;
+            color: #666;
+            display: none;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 2px solid #ddd;
+        }
+        
+        .faq-item.active .faq-answer {
+            display: block;
+        }
+        
+        /* Footer */
+        .footer {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+            text-align: center;
+            margin-top: 30px;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+        }
+        
+        .footer-title {
+            font-size: 1.5em;
+            color: #667eea;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        
+        .footer-text {
+            color: #666;
+            font-size: 1.1em;
+        }
+        
+        .footer-copyright {
+            margin-top: 30px;
+            padding-top: 30px;
+            border-top: 2px solid #f0f0f0;
+            color: #999;
+        }
+
+        .other-pg{
+            position: absolute;
+            z-index: 100;
+            top: 30px;
+            right: 30px;
+            background: #f39c12;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(243, 156, 18, 0.4);
+
+        }
+      
+        .other-pg:hover {
+            background: #e67e22;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(243, 156, 18, 0.6);
+        }
+        
+        /* Print styles */
+        @media print {
+            body {
+                background: white;
+            }
+            
+            .nav-tabs {
+                display: none;
+            }
+            
+            .content-section {
+                display: block !important;
+                page-break-after: always;
+            }
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .section-title {
+                font-size: 1.8em;
+            }
+            
+            .nav-tab {
+                min-width: 100%;
+            }
+            
+            .content-section {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+        <a class="other-pg" href="Clinikio_Presentation.html">تعرف عنا أكثر</a>
+
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div style="font-size: 4em; margin-bottom: 20px;">📅</div>
+            <h1>دليل نظام حجز المواعيد</h1>
+            <div class="subtitle">Clinikio Booking System Manual</div>
+            <div class="company">
+                💼 تطوير وتنفيذ<br>
+                <strong style="color: #667eea;">شركة ميسان لحلول تقنية المعلومات</strong>
+            </div>
+        </div>
+
+        <!-- Navigation Tabs -->
+        <div class="nav-tabs">
+            <button class="nav-tab active" onclick="showSection('overview')">📋 نظرة عامة</button>
+            <button class="nav-tab" onclick="showSection('patient')">👤 دليل المريض</button>
+            <button class="nav-tab" onclick="showSection('admin')">⚙️ دليل الإدارة</button>
+            <button class="nav-tab" onclick="showSection('features')">✨ المميزات</button>
+            <button class="nav-tab" onclick="showSection('troubleshooting')">🔧 حل المشاكل</button>
+            <button class="nav-tab" onclick="showSection('faq')">❓ الأسئلة الشائعة</button>
+        </div>
+
+        <!-- Content Sections -->
+        
+        <!-- Overview Section -->
+        <div id="overview" class="content-section active">
+            <h2 class="section-title">📋 نظرة عامة على النظام</h2>
+            
+            <div class="alert alert-info">
+                <strong>🎯 ما هو نظام حجز المواعيد Clinikio؟</strong><br>
+                نظام متكامل يسمح للمرضى بحجز مواعيدهم أونلاين بسهولة، ويمكّن الإدارة من تنظيم وإدارة المواعيد بكفاءة عالية.
+            </div>
+
+            <h3 class="section-subtitle">🎯 أهداف النظام</h3>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">⏰</div>
+                    <div class="feature-title">توفير الوقت</div>
+                    <div class="feature-desc">تقليل أوقات الانتظار وتنظيم الزيارات بشكل فعال</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <div class="feature-title">سهولة الوصول</div>
+                    <div class="feature-desc">الحجز من أي مكان عبر الإنترنت 24/7</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔔</div>
+                    <div class="feature-title">التذكير التلقائي</div>
+                    <div class="feature-desc">إرسال تذكيرات تلقائية للمرضى قبل الموعد</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <div class="feature-title">التقارير المتقدمة</div>
+                    <div class="feature-desc">تحليلات شاملة لأداء العيادة والحجوزات</div>
+                </div>
+            </div>
+
+            <h3 class="section-subtitle">🔄 آلية عمل النظام</h3>
+            <div class="screenshot-placeholder">
+              <img class="screenshot-placeholder" src="images/image3.png" alt="">
+            </div>
+
+            <div class="steps-container">
+                <div class="step">
+                    <span class="step-number">1</span>
+                    <div class="step-title">📝 المريض يسجل أو يسجل دخول</div>
+                    <div class="step-content">
+                        يقوم المريض بإنشاء حساب جديد أو تسجيل الدخول لحساب موجود
+                    </div>
+                </div>
+                <div class="step">
+                    <span class="step-number">2</span>
+                    <div class="step-title">📅 اختيار الموعد المناسب</div>
+                    <div class="step-content">
+                        يختار المريض التخصص، الطبيب، التاريخ والوقت المتاح
+                    </div>
+                </div>
+                <div class="step">
+                    <span class="step-number">3</span>
+                    <div class="step-title">✅ تأكيد الحجز</div>
+                    <div class="step-content">
+                        يتلقى المريض تأكيد فوري برسالة نصية وبريد إلكتروني
+                    </div>
+                </div>
+                <div class="step">
+                    <span class="step-number">4</span>
+                    <div class="step-title">🔔 التذكير</div>
+                    <div class="step-content">
+                        يتم إرسال تذكير قبل الموعد بـ 24 ساعة وساعة واحدة
+                    </div>
+                </div>
+                <div class="step">
+                    <span class="step-number">5</span>
+                    <div class="step-title">🏥 الزيارة</div>
+                    <div class="step-content">
+                        يحضر المريض في الموعد المحدد دون انتظار طويل
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="section-subtitle">📊 إحصائيات النظام</h3>
+            <table class="info-table">
+                <thead>
+                    <tr>
+                        <th>المؤشر</th>
+                        <th>القيمة</th>
+                        <th>الوصف</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>معدل نجاح الحجز</td>
+                        <td>98%</td>
+                        <td>نسبة الحجوزات الناجحة من إجمالي المحاولات</td>
+                    </tr>
+                    <tr>
+                        <td>توفير الوقت</td>
+                        <td>45 دقيقة</td>
+                        <td>متوسط الوقت الموفر لكل مريض</td>
+                    </tr>
+                    <tr>
+                        <td>رضا المرضى</td>
+                        <td>4.8/5</td>
+                        <td>تقييم المرضى لتجربة الحجز</td>
+                    </tr>
+                    <tr>
+                        <td>نسبة الحضور</td>
+                        <td>92%</td>
+                        <td>نسبة المرضى الذين حضروا المواعيد المحجوزة</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Patient Guide Section -->
+        <div id="patient" class="content-section">
+            <h2 class="section-title">👤 دليل المريض - كيف تحجز موعدك</h2>
+
+            <div class="alert alert-success">
+                <strong>✅ مرحباً بك!</strong><br>
+                هذا الدليل سيساعدك في حجز موعدك بسهولة وسرعة في بضع خطوات بسيطة.
+            </div>
+
+            <h3 class="section-subtitle">🆕 الخطوة 1: إنشاء حساب جديد</h3>
+            <div class="step">
+                <span class="step-number">1.1</span>
+                <div class="step-title">الدخول لصفحة التسجيل</div>
+                <div class="step-content">
+                    <ul>
+                        <li>افتح موقع العيادة الإلكتروني</li>
+                        <li>اضغط على زر "تسجيل جديد" أو "إنشاء حساب"</li>
+                        <li>ستظهر لك صفحة التسجيل</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="screenshot-placeholder">
+                🖼️ صورة توضيحية: صفحة التسجيل
+            </div>
+
+            <div class="step">
+                <span class="step-number">1.2</span>
+                <div class="step-title">إدخال البيانات الشخصية</div>
+                <div class="step-content">
+                    <table class="info-table">
+                        <thead>
+                            <tr>
+                                <th>الحقل</th>
+                                <th>مطلوب؟</th>
+                                <th>ملاحظات</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>الاسم الكامل</td>
+                                <td>✅ نعم</td>
+                                <td>الاسم الثلاثي أو الرباعي</td>
+                            </tr>
+                            <tr>
+                                <td>رقم الهاتف</td>
+                                <td>✅ نعم</td>
+                                <td>يجب أن يبدأ بـ 05 (10 أرقام)</td>
+                            </tr>
+                            <tr>
+                                <td>البريد الإلكتروني</td>
+                                <td>✅ نعم</td>
+                                <td>سيُستخدم لتسجيل الدخول</td>
+                            </tr>
+                            <tr>
+                                <td>تاريخ الميلاد</td>
+                                <td>✅ نعم</td>
+                                <td>للتأكد من العمر المناسب للخدمة</td>
+                            </tr>
+                            <tr>
+                                <td>الجنس</td>
+                                <td>✅ نعم</td>
+                                <td>ذكر / أنثى</td>
+                            </tr>
+                            <tr>
+                                <td>رقم الهوية</td>
+                                <td>⚪ اختياري</td>
+                                <td>للمرضى السعوديين</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="alert alert-warning">
+                <strong>⚠️ تنبيه مهم:</strong><br>
+                تأكد من إدخال رقم هاتف صحيح - سيُستخدم لإرسال التأكيدات والتذكيرات!
+            </div>
+
+            <h3 class="section-subtitle">📅 الخطوة 2: حجز موعد جديد</h3>
+            
+            <div class="step">
+                <span class="step-number">2.1</span>
+                <div class="step-title">اختيار التخصص</div>
+                <div class="step-content">
+                    <ul>
+                        <li>من الصفحة الرئيسية، اضغط على "حجز موعد جديد"</li>
+                        <li>اختر التخصص المطلوب من القائمة:
+                            <ul>
+                                <li>👨‍⚕️ الطب العام</li>
+                                <li>🦷 طب الأسنان</li>
+                                <li>👩‍⚕️ الأمراض الجلدية</li>
+                                <li>👶 طب الأطفال</li>
+                                <li>🩺 الباطنة</li>
+                                <li>وغيرها...</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="screenshot-placeholder">
+                <img class="screenshot-placeholder" src="images/image.png" alt="">
+            </div>
+
+            <div class="step">
+                <span class="step-number">2.2</span>
+                <div class="step-title">اختيار الطبيب (اختياري)</div>
+                <div class="step-content">
+                    <ul>
+                        <li>سيظهر لك قائمة بالأطباء المتاحين في التخصص المختار</li>
+                        <li>يمكنك عرض معلومات كل طبيب:
+                            <ul>
+                                <li>📋 السيرة الذاتية</li>
+                                <li>🎓 المؤهلات</li>
+                                <li>⭐ تقييمات المرضى</li>
+                                <li>📅 المواعيد المتاحة</li>
+                            </ul>
+                        </li>
+                        <li>أو اختر "أول طبيب متاح" للحصول على أقرب موعد</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="step">
+                <span class="step-number">2.3</span>
+                <div class="step-title">اختيار التاريخ والوقت</div>
+                <div class="step-content">
+                    <div class="alert alert-info">
+                        <strong>💡 نصيحة:</strong> المواعيد الملونة بالأخضر متاحة، بينما الرمادية محجوزة أو غير متاحة.
+                    </div>
+                    <ul>
+                        <li>اختر التاريخ من التقويم الظاهر</li>
+                        <li>ستظهر الأوقات المتاحة في ذلك اليوم</li>
+                        <li>اختر الوقت المناسب لك</li>
+                        <li>مدة الكشف: عادة 20-30 دقيقة</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="screenshot-placeholder">
+                🖼️ صورة: التقويم واختيار الوقت
+            </div>
+
+            <div class="step">
+                <span class="step-number">2.4</span>
+                <div class="step-title">إضافة معلومات إضافية</div>
+                <div class="step-content">
+                    <ul>
+                        <li><strong>سبب الزيارة:</strong> اكتب وصف مختصر للحالة</li>
+                        <li><strong>هل هذه زيارة متابعة؟</strong> نعم / لا</li>
+                        <li><strong>هل لديك حساسية من أدوية؟</strong> اذكرها إن وجدت</li>
+                        <li><strong>ملاحظات خاصة:</strong> أي معلومات إضافية مهمة</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="step">
+                <span class="step-number">2.5</span>
+                <div class="step-title">مراجعة وتأكيد الحجز</div>
+                <div class="step-content">
+                    <p><strong>راجع البيانات التالية قبل التأكيد:</strong></p>
+                    <ul>
+                        <li>✅ التخصص والطبيب</li>
+                        <li>✅ التاريخ والوقت</li>
+                        <li>✅ بياناتك الشخصية</li>
+                        <li>✅ رسوم الكشف (إن وجدت)</li>
+                    </ul>
+                    <p><strong>اضغط على "تأكيد الحجز"</strong></p>
+                </div>
+            </div>
+
+            <div class="alert alert-success">
+                <strong>🎉 تم الحجز بنجاح!</strong><br>
+                سيصلك رسالة نصية وبريد إلكتروني يحتوي على:
+                <ul style="margin: 10px 0 0 20px;">
+                    <li>رقم الحجز</li>
+                    <li>تفاصيل الموعد</li>
+                    <li>رابط لإدارة الحجز</li>
+                </ul>
+            </div>
+
+            <h3 class="section-subtitle">📱 الخطوة 3: إدارة حجوزاتك</h3>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">👁️</div>
+                    <div class="feature-title">عرض الحجوزات</div>
+                    <div class="feature-desc">
+                        • من حسابك، ادخل "حجوزاتي"<br>
+                        • ستجد جميع مواعيدك (السابقة والقادمة)<br>
+                        • يمكنك عرض تفاصيل كل حجز
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">✏️</div>
+                    <div class="feature-title">تعديل الحجز</div>
+                    <div class="feature-desc">
+                        • اضغط على "تعديل" بجانب الحجز<br>
+                        • يمكنك تغيير التاريخ أو الوقت<br>
+                        • التعديل متاح حتى 24 ساعة قبل الموعد
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">❌</div>
+                    <div class="feature-title">إلغاء الحجز</div>
+                    <div class="feature-desc">
+                        • اضغط على "إلغاء" بجانب الحجز<br>
+                        • أكد الإلغاء<br>
+                        • الإلغاء مجاني حتى 12 ساعة قبل الموعد
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔔</div>
+                    <div class="feature-title">التذكيرات</div>
+                    <div class="feature-desc">
+                        • تذكير قبل 24 ساعة<br>
+                        • تذكير قبل ساعة واحدة<br>
+                        • يمكنك إيقاف التذكيرات من الإعدادات
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="section-subtitle">📝 الخطوة 4: يوم الزيارة</h3>
+
+            <div class="step">
+                <div class="step-title">✅ قبل الحضور</div>
+                <div class="step-content">
+                    <ul>
+                        <li>تأكد من حجزك من خلال رسالة التأكيد</li>
+                        <li>اطبع تذكرة الحجز أو احفظها على هاتفك</li>
+                        <li>احضر قبل الموعد بـ 10 دقائق</li>
+                        <li>أحضر بطاقة الهوية والتأمين (إن وجد)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-title">🏥 عند الوصول</div>
+                <div class="step-content">
+                    <ul>
+                        <li>توجه لمكتب الاستقبال</li>
+                        <li>أعطِ رقم حجزك أو اسمك</li>
+                        <li>انتظر في الصالة حتى استدعائك</li>
+                        <li>ستُنادى عبر النظام الصوتي والشاشة</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="alert alert-info">
+                <strong>💡 هل تعلم؟</strong><br>
+                يمكنك تقييم تجربتك بعد الزيارة من خلال الرابط المُرسل لك - رأيك يهمنا! ⭐
+            </div>
+        </div>
+
+        <!-- Admin Guide Section -->
+        <div id="admin" class="content-section">
+            <h2 class="section-title">⚙️ دليل الإدارة - إدارة المواعيد</h2>
+
+            <div class="alert alert-warning">
+                <strong>👨‍💼 هذا القسم مخصص لموظفي الإدارة والاستقبال</strong><br>
+                يتطلب حساب إداري بصلاحيات خاصة للوصول لهذه المميزات.
+            </div>
+
+            <h3 class="section-subtitle">🔐 تسجيل الدخول للوحة الإدارة</h3>
+
+            <div class="step">
+                <span class="step-number">1</span>
+                <div class="step-title">الوصول للوحة الإدارة</div>
+                <div class="step-content">
+                    <ul>
+                        <li>افتح رابط لوحة الإدارة: <code>clinic-url.com/admin</code></li>
+                        <li>أدخل اسم المستخدم وكلمة المرور الخاصة بك</li>
+                        <li>اختر الدور: (مدير / موظف استقبال / طبيب)</li>
+                        <li>اضغط "تسجيل دخول"</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="code-block">
+رابط لوحة الإدارة: https://your-clinic.clinikio.com/admin
+اسم المستخدم: admin@clinic.com
+كلمة المرور: *********
+            </div>
+
+            <h3 class="section-subtitle">📊 لوحة التحكم الرئيسية</h3>
+
+            <div class="screenshot-placeholder">
+                <img class="screenshot-placeholder" src="images/admin-dashboard.png" alt="">
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📅</div>
+                    <div class="feature-title">مواعيد اليوم</div>
+                    <div class="feature-desc">
+                        عرض جميع المواعيد المحجوزة لهذا اليوم مع حالاتها
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📈</div>
+                    <div class="feature-title">الإحصائيات</div>
+                    <div class="feature-desc">
+                        عدد الحجوزات، الإلغاءات، المكتملة، والغائبين
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">👥</div>
+                    <div class="feature-title">المرضى الجدد</div>
+                    <div class="feature-desc">
+                        قائمة بالمرضى الذين سجلوا حديثاً في النظام
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚠️</div>
+                    <div class="feature-title">التنبيهات</div>
+                    <div class="feature-desc">
+                        تنبيهات الحجوزات المعلقة، الإلغاءات، والتعديلات
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="section-subtitle">📝 إدارة الحجوزات</h3>
+
+            <div class="step">
+                <span class="step-number">2.1</span>
+                <div class="step-title">عرض جميع الحجوزات</div>
+                <div class="step-content">
+                    <ul>
+                        <li>من القائمة الجانبية، اضغط "الحجوزات"</li>
+                        <li>ستظهر قائمة بجميع الحجوزات مع الفلاتر التالية:
+                            <ul>
+                                <li>📅 حسب التاريخ (اليوم، الأسبوع، الشهر)</li>
+                                <li>👨‍⚕️ حسب الطبيب</li>
+                                <li>🏥 حسب التخصص</li>
+                                <li>✅ حسب الحالة (معلق، مؤكد، ملغي، مكتمل)</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="screenshot-placeholder">
+                <img class="screenshot-placeholder" src="images/image2.png" alt="">            
+            </div>
+
+            <div class="step">
+                <span class="step-number">2.2</span>
+                <div class="step-title">إضافة حجز يدوي</div>
+                <div class="step-content">
+                    <div class="alert alert-info">
+                        استخدم هذه الميزة عند اتصال مريض هاتفياً أو حضوره مباشرة
+                    </div>
+                    <ul>
+                        <li>اضغط زر "➕ حجز جديد"</li>
+                        <li>ابحث عن المريض في النظام أو أضف مريض جديد</li>
+                        <li>اختر التخصص والطبيب</li>
+                        <li>حدد التاريخ والوقت المتاح</li>
+                        <li>أضف أي ملاحظات</li>
+                        <li>اضغط "حفظ"</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="step">
+                <span class="step-number">2.3</span>
+                <div class="step-title">تعديل حجز موجود</div>
+                <div class="step-content">
+                    <ul>
+                        <li>من قائمة الحجوزات، اضغط "✏️" بجانب الحجز</li>
+                        <li>يمكنك تعديل:
+                            <ul>
+                                <li>التاريخ والوقت</li>
+                                <li>الطبيب (في نفس التخصص)</li>
+                                <li>الحالة</li>
+                                <li>الملاحظات</li>
+                            </ul>
+                        </li>
+                        <li>سيتم إرسال إشعار تلقائي للمريض بالتعديل</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="alert alert-warning">
+                <strong>⚠️ تنبيه:</strong><br>
+                عند تعديل موعد، تأكد من إبلاغ المريض مباشرة بالإضافة للإشعار التلقائي
+            </div>
+
+            <div class="step">
+                <span class="step-number">2.4</span>
+                <div class="step-title">إلغاء أو رفض حجز</div>
+                <div class="step-content">
+                    <ul>
+                        <li>من قائمة الحجوزات، اضغط "❌" بجانب الحجز</li>
+                        <li>اختر سبب الإلغاء من القائمة:
+                            <ul>
+                                <li>طلب من المريض</li>
+                                <li>غياب الطبيب</li>
+                                <li>طوارئ</li>
+                                <li>سبب آخر (حدده)</li>
+                            </ul>
+                        </li>
+                        <li>أكد الإلغاء</li>
+                        <li>سيتم إشعار المريض فوراً</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="step">
+                <span class="step-number">2.5</span>
+                <div class="step-title">تأكيد حضور المريض</div>
+                <div class="step-content">
+                    <ul>
+                        <li>عند حضور المريض، افتح حجزه</li>
+                        <li>اضغط "✅ تأكيد الحضور"</li>
+                        <li>سيتم نقل الحجز لقائمة "قيد الفحص"</li>
+                        <li>بعد انتهاء الفحص، اضغط "✅ مكتمل"</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3 class="section-subtitle">👥 إدارة المرضى</h3>
+
+            <div class="step">
+                <div class="step-title">📋 قاعدة بيانات المرضى</div>
+                <div class="step-content">
+                    <ul>
+                        <li>من القائمة، اختر "المرضى"</li>
+                        <li>ستظهر قائمة بجميع المرضى المسجلين</li>
+                        <li>يمكنك:
+                            <ul>
+                                <li>🔍 البحث عن مريض (بالاسم، الهاتف، أو الهوية)</li>
+                                <li>👁️ عرض ملف المريض الكامل</li>
+                                <li>📅 عرض تاريخ الحجوزات</li>
+                                <li>✏️ تعديل البيانات</li>
+                                <li>➕ إضافة مريض جديد</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="screenshot-placeholder">
+                🖼️ صورة: ملف المريض
+            </div>
+
+            <h3 class="section-subtitle">🕒 إدارة جداول المواعيد</h3>
+
+            <div class="step">
+                <div class="step-title">📆 إعداد جدول الطبيب</div>
+                <div class="step-content">
+                    <ul>
+                        <li>اختر "الجداول" من القائمة</li>
+                        <li>حدد الطبيب</li>
+                        <li>أضف أوقات العمل:
+                            <ul>
+                                <li>أيام العمل (الأحد - الخميس مثلاً)</li>
+                                <li>ساعات العمل (من 9:00 ص - 5:00 م)</li>
+                                <li>مدة الكشف (20 دقيقة مثلاً)</li>
+                                <li>فترة الاستراحة</li>
+                            </ul>
+                        </li>
+                        <li>احفظ الجدول</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-title">🚫 تعطيل أوقات محددة</div>
+                <div class="step-content">
+                    <div class="alert alert-info">
+                        استخدم هذا عند إجازة الطبيب أو اجتماع طارئ
+                    </div>
+                    <ul>
+                        <li>من جدول الطبيب، اختر التاريخ</li>
+                        <li>حدد الأوقات التي تريد تعطيلها</li>
+                        <li>أضف سبب التعطيل</li>
+                        <li>احفظ - سيتم إخفاء هذه الأوقات من نظام الحجز</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3 class="section-subtitle">💬 التواصل مع المرضى</h3>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📧</div>
+                    <div class="feature-title">البريد الإلكتروني</div>
+                    <div class="feature-desc">
+                        إرسال رسائل بريد إلكتروني جماعية أو فردية للمرضى
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <div class="feature-title">الرسائل النصية</div>
+                    <div class="feature-desc">
+                        إرسال SMS للتذكير، التأكيد، أو الإعلانات
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔔</div>
+                    <div class="feature-title">الإشعارات</div>
+                    <div class="feature-desc">
+                        إشعارات فورية داخل التطبيق للمرضى
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📢</div>
+                    <div class="feature-title">الإعلانات</div>
+                    <div class="feature-desc">
+                        نشر إعلانات وأخبار العيادة للجميع
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="section-subtitle">📊 التقارير والإحصائيات</h3>
+
+            <div class="step">
+                <div class="step-title">📈 أنواع التقارير المتاحة</div>
+                <div class="step-content">
+                    <table class="info-table">
+                        <thead>
+                            <tr>
+                                <th>نوع التقرير</th>
+                                <th>الوصف</th>
+                                <th>الفترة</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>تقرير الحجوزات</td>
+                                <td>عدد الحجوزات، الإلغاءات، المكتملة</td>
+                                <td>يومي / أسبوعي / شهري</td>
+                            </tr>
+                            <tr>
+                                <td>تقرير الإيرادات</td>
+                                <td>الإيرادات من الحجوزات والخدمات</td>
+                                <td>شهري / سنوي</td>
+                            </tr>
+                            <tr>
+                                <td>تقرير الأطباء</td>
+                                <td>أداء كل طبيب وعدد المرضى</td>
+                                <td>شهري</td>
+                            </tr>
+                            <tr>
+                                <td>تقرير الحضور</td>
+                                <td>نسبة الحضور والغياب</td>
+                                <td>أسبوعي / شهري</td>
+                            </tr>
+                            <tr>
+                                <td>تقرير الأوقات</td>
+                                <td>متوسط أوقات الانتظار والكشف</td>
+                                <td>يومي / أسبوعي</td>
+                            </tr>
+                            <tr>
+                                <td>تقرير التقييمات</td>
+                                <td>تقييمات المرضى ورضاهم</td>
+                                <td>شهري</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-title">📥 تصدير التقارير</div>
+                <div class="step-content">
+                    <ul>
+                        <li>اختر التقرير المطلوب</li>
+                        <li>حدد الفترة الزمنية</li>
+                        <li>اختر صيغة التصدير:
+                            <ul>
+                                <li>📄 PDF - للطباعة والأرشفة</li>
+                                <li>📊 Excel - للتحليل</li>
+                                <li>📈 CSV - لأنظمة أخرى</li>
+                            </ul>
+                        </li>
+                        <li>اضغط "تصدير"</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="screenshot-placeholder">
+                🖼️ صورة: صفحة التقارير والإحصائيات
+            </div>
+
+            <h3 class="section-subtitle">⚙️ الإعدادات المتقدمة</h3>
+
+            <div class="step">
+                <div class="step-title">🏥 إعدادات العيادة</div>
+                <div class="step-content">
+                    <ul>
+                        <li><strong>المعلومات الأساسية:</strong>
+                            <ul>
+                                <li>اسم العيادة</li>
+                                <li>الشعار</li>
+                                <li>العنوان</li>
+                                <li>أرقام التواصل</li>
+                            </ul>
+                        </li>
+                        <li><strong>ساعات العمل:</strong>
+                            <ul>
+                                <li>أيام العمل</li>
+                                <li>ساعات الدوام</li>
+                                <li>العطلات الرسمية</li>
+                            </ul>
+                        </li>
+                        <li><strong>سياسات الحجز:</strong>
+                            <ul>
+                                <li>المدة المسموح بها للإلغاء المجاني</li>
+                                <li>غرامة الإلغاء المتأخر</li>
+                                <li>الحد الأقصى للحجوزات المسبقة</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="alert alert-danger">
+                <strong>⚠️ تنبيه أمني:</strong><br>
+                تأكد من تسجيل خروجك بعد انتهاء العمل، وعدم مشاركة بيانات الدخول الإدارية!
+            </div>
+        </div>
+
+        <!-- Features Section -->
+        <div id="features" class="content-section">
+            <h2 class="section-title">✨ المميزات التفصيلية</h2>
+
+            <h3 class="section-subtitle">🎯 مميزات للمرضى</h3>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <div class="feature-title">حجز أونلاين 24/7</div>
+                    <div class="feature-desc">
+                        احجز موعدك في أي وقت من أي مكان عبر الإنترنت دون الحاجة للاتصال
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔔</div>
+                    <div class="feature-title">تذكيرات تلقائية</div>
+                    <div class="feature-desc">
+                        رسائل تذكير بالموعد عبر SMS والبريد الإلكتروني قبل 24 ساعة وساعة واحدة
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">👨‍⚕️</div>
+                    <div class="feature-title">اختيار الطبيب</div>
+                    <div class="feature-desc">
+                        عرض معلومات الأطباء وتقييماتهم واختيار الطبيب المفضل
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">✏️</div>
+                    <div class="feature-title">إدارة سهلة</div>
+                    <div class="feature-desc">
+                        تعديل أو إلغاء المواعيد بسهولة من حسابك الشخصي
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📜</div>
+                    <div class="feature-title">سجل الزيارات</div>
+                    <div class="feature-desc">
+                        الاحتفاظ بسجل كامل لجميع زياراتك ومواعيدك السابقة
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⭐</div>
+                    <div class="feature-title">تقييم الخدمة</div>
+                    <div class="feature-desc">
+                        إمكانية تقييم الطبيب والخدمة بعد كل زيارة
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <div class="feature-title">خصوصية تامة</div>
+                    <div class="feature-desc">
+                        حماية بياناتك الطبية والشخصية بأعلى معايير الأمان
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌐</div>
+                    <div class="feature-title">متعدد الأجهزة</div>
+                    <div class="feature-desc">
+                        استخدام النظام من الكمبيوتر، الموبايل، أو التابلت
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="section-subtitle">💼 مميزات للإدارة</h3>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <div class="feature-title">لوحة تحكم شاملة</div>
+                    <div class="feature-desc">
+                        عرض جميع المواعيد والإحصائيات في مكان واحد
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🗓️</div>
+                    <div class="feature-title">إدارة الجداول</div>
+                    <div class="feature-desc">
+                        إعداد وتعديل جداول الأطباء بمرونة عالية
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">👥</div>
+                    <div class="feature-title">قاعدة بيانات مركزية</div>
+                    <div class="feature-desc">
+                        حفظ وإدارة بيانات جميع المرضى في مكان آمن
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💬</div>
+                    <div class="feature-title">تواصل فعّال</div>
+                    <div class="feature-desc">
+                        إرسال رسائل جماعية أو فردية للمرضى
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📈</div>
+                    <div class="feature-title">تقارير متقدمة</div>
+                    <div class="feature-desc">
+                        تقارير تفصيلية عن الأداء والإيرادات والحضور
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔄</div>
+                    <div class="feature-title">تحديث تلقائي</div>
+                    <div class="feature-desc">
+                        تحديث فوري للبيانات في جميع الأجهزة
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">👨‍💻</div>
+                    <div class="feature-title">صلاحيات متعددة</div>
+                    <div class="feature-desc">
+                        تحديد صلاحيات مختلفة للمديرين والموظفين
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💾</div>
+                    <div class="feature-title">نسخ احتياطي</div>
+                    <div class="feature-desc">
+                        نسخ احتياطي تلقائي للبيانات وحماية من الفقدان
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="section-subtitle">🔧 المميزات التقنية</h3>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">☁️</div>
+                    <div class="feature-title">سحابي 100%</div>
+                    <div class="feature-desc">
+                        لا يحتاج لخوادم محلية - كل شيء على السحابة الآمنة
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <div class="feature-title">سرعة فائقة</div>
+                    <div class="feature-desc">
+                        أداء سريع وتجاوب فوري مع جميع العمليات
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔐</div>
+                    <div class="feature-title">أمان متقدم</div>
+                    <div class="feature-desc">
+                        تشفير البيانات وحماية متعددة الطبقات
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📲</div>
+                    <div class="feature-title">Responsive Design</div>
+                    <div class="feature-desc">
+                        يعمل بسلاسة على جميع الأجهزة والشاشات
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔄</div>
+                    <div class="feature-title">تكامل API</div>
+                    <div class="feature-desc">
+                        إمكانية التكامل مع أنظمة أخرى عبر API
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌍</div>
+                    <div class="feature-title">متعدد اللغات</div>
+                    <div class="feature-desc">
+                        دعم اللغة العربية والإنجليزية بسهولة التبديل
+                    </div>
+                </div>
+            </div>
+
+            <div class="alert alert-success">
+                <strong>💡 هل تعلم؟</strong><br>
+                نظام Clinikio يتم تطويره وتحسينه باستمرار - جميع التحديثات مجانية ومتاحة تلقائياً!
+            </div>
+        </div>
+
+        <!-- Troubleshooting Section -->
+        <div id="troubleshooting" class="content-section">
+            <h2 class="section-title">🔧 حل المشاكل الشائعة</h2>
+
+            <h3 class="section-subtitle">❌ مشاكل تسجيل الدخول</h3>
+
+            <div class="step">
+                <div class="step-title">المشكلة: نسيت كلمة المرور</div>
+                <div class="step-content">
+                    <strong>الحل:</strong>
+                    <ul>
+                        <li>اضغط على "نسيت كلمة المرور؟" في صفحة الدخول</li>
+                        <li>أدخل بريدك الإلكتروني المسجل</li>
+                        <li>افتح البريد وستجد رابط إعادة تعيين كلمة المرور</li>
+                        <li>اضغط الرابط وأدخل كلمة مرور جديدة</li>
+                        <li>سجل دخول بكلمة المرور الجديدة</li>
+                    </ul>
+                    <div class="alert alert-info">
+                        💡 إذا لم يصلك البريد، تحقق من صندوق الرسائل غير المرغوبة (Spam)
+                    </div>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-title">المشكلة: رسالة "البريد الإلكتروني مستخدم"</div>
+                <div class="step-content">
+                    <strong>الحل:</strong>
+                    <ul>
+                        <li>هذا يعني أن لديك حساب مسبق بهذا البريد</li>
+                        <li>جرب تسجيل الدخول بدلاً من إنشاء حساب جديد</li>
+                        <li>إذا نسيت كلمة المرور، استخدم "نسيت كلمة المرور"</li>
+                        <li>إذا استمرت المشكلة، تواصل مع الدعم الفني</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3 class="section-subtitle">📅 مشاكل الحجز</h3>
+
+            <div class="step">
+                <div class="step-title">المشكلة: لا توجد مواعيد متاحة</div>
+                <div class="step-content">
+                    <strong>الأسباب المحتملة والحلول:</strong>
+                    <ul>
+                        <li><strong>الطبيب مشغول:</strong> جرب تاريخ آخر أو طبيب آخر</li>
+                        <li><strong>الجدول غير محدّث:</strong> انتظر قليلاً وحدّث الصفحة</li>
+                        <li><strong>خارج ساعات العمل:</strong> تأكد من اختيار أيام العمل</li>
+                        <li><strong>بحث محدد جداً:</strong> وسّع نطاق البحث (مثلاً أي طبيب)</li>
+                    </ul>
+                    <div class="alert alert-warning">
+                        📞 إذا كانت الحالة طارئة، اتصل مباشرة بالعيادة
+                    </div>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-title">المشكلة: لم يصلني تأكيد الحجز</div>
+                <div class="step-content">
+                    <strong>الحل:</strong>
+                    <ul>
+                        <li>تحقق من صندوق الرسائل غير المرغوبة (Spam)</li>
+                        <li>تأكد من صحة رقم هاتفك وبريدك في الملف الشخصي</li>
+                        <li>حدّث الصفحة وتحقق من "حجوزاتي" - إذا ظهر الحجز فهو مؤكد</li>
+                        <li>يمكنك إعادة إرسال التأكيد من صفحة "حجوزاتي"</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-title">المشكلة: لا أستطيع إلغاء الحجز</div>
+                <div class="step-content">
+                    <strong>السبب:</strong> نظام الإلغاء له شروط محددة
+                    <ul>
+                        <li>الإلغاء المجاني متاح حتى 12 ساعة قبل الموعد</li>
+                        <li>بعد ذلك، قد تُطبق غرامة إلغاء</li>
+                        <li>إذا كان الموعد خلال ساعات قليلة، اتصل بالعيادة مباشرة</li>
+                    </ul>
+                    <div class="alert alert-danger">
+                        ⚠️ الغياب المتكرر دون إلغاء قد يؤدي لتعليق حسابك
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="section-subtitle">💻 مشاكل تقنية</h3>
+
+            <div class="step">
+                <div class="step-title">المشكلة: الموقع بطيء أو لا يعمل</div>
+                <div class="step-content">
+                    <strong>الحل:</strong>
+                    <ul>
+                        <li><strong>تحقق من اتصال الإنترنت:</strong> تأكد من اتصالك بالإنترنت</li>
+                        <li><strong>حدّث الصفحة:</strong> F5 أو Ctrl+R</li>
+                        <li><strong>امسح الكاش:</strong> Ctrl+Shift+Del واختر "مسح بيانات التصفح"</li>
+                        <li><strong>جرب متصفح آخر:</strong> Chrome, Firefox, Safari, Edge</li>
+                        <li><strong>تأكد من تحديث المتصفح:</strong> استخدم أحدث إصدار</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-title">المشكلة: الصفحة تظهر بشكل غريب</div>
+                <div class="step-content">
+                    <strong>الحل:</strong>
+                    <ul>
+                        <li>امسح ذاكرة التخزين المؤقت (Cache)</li>
+                        <li>تأكد من عدم استخدام VPN أو Proxy</li>
+                        <li>حاول تصغير/تكبير الشاشة (Ctrl + / Ctrl -)</li>
+                        <li>جرب وضع التصفح الخاص (Incognito/Private)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-title">المشكلة: لا أستطيع رفع ملف</div>
+                <div class="step-content">
+                    <strong>الحل:</strong>
+                    <ul>
+                        <li>تأكد من حجم الملف - الحد الأقصى عادة 5 MB</li>
+                        <li>تأكد من نوع الملف المسموح: JPG, PNG, PDF</li>
+                        <li>جرب ضغط الصورة أو الملف</li>
+                        <li>تأكد من إذن الوصول للملفات في المتصفح</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3 class="section-subtitle">📱 مشاكل الإشعارات</h3>
+
+            <div class="step">
+                <div class="step-title">المشكلة: لا تصلني التذكيرات</div>
+                <div class="step-content">
+                    <strong>الحل:</strong>
+                    <ul>
+                        <li><strong>تحقق من الإعدادات:</strong> ادخل "الملف الشخصي" > "الإعدادات" > "الإشعارات"</li>
+                        <li><strong>تأكد من تفعيل:</strong>
+                            <ul>
+                                <li>✅ تذكيرات SMS</li>
+                                <li>✅ تذكيرات البريد الإلكتروني</li>
+                                <li>✅ إشعارات المتصفح (إذا كنت تستخدم الويب)</li>
+                            </ul>
+                        </li>
+                        <li><strong>للرسائل النصية:</strong> تأكد من رقم هاتفك صحيح ومفعّل</li>
+                        <li><strong>للبريد:</strong> تحقق من Spam وأضف البريد للقائمة البيضاء</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="alert alert-info">
+                <strong>💡 نصيحة عامة:</strong><br>
+                إذا استمرت أي مشكلة بعد تجربة الحلول أعلاه:
+                <ul style="margin: 10px 0 0 20px;">
+                    <li>اتصل بالدعم الفني على: 0534080555</li>
+                    <li>راسلنا على: support@maysan.sa</li>
+                    <li>أرسل تفاصيل المشكلة مع لقطة شاشة إن أمكن</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- FAQ Section -->
+        <div id="faq" class="content-section">
+            <h2 class="section-title">❓ الأسئلة الشائعة (FAQ)</h2>
+
+            <h3 class="section-subtitle">🤔 أسئلة عامة</h3>
+
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <div class="faq-question">❓ هل الحجز عبر النظام مجاني؟</div>
+                <div class="faq-answer">
+                    نعم، الحجز عبر النظام مجاني تماماً. أنت تدفع فقط رسوم الكشف الطبي عند الزيارة.
+                </div>
+            </div>
+
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <div class="faq-question">❓ هل يمكنني الحجز دون إنشاء حساب؟</div>
+                <div class="faq-answer">
+                    لا، يجب إنشاء حساب لضمان حفظ بياناتك وإمكانية إدارة حجوزاتك. التسجيل يستغرق دقيقة واحدة فقط.
+                </div>
+            </div>
+
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <div class="faq-question">❓ كم تبلغ مدة انتظار الموعد المتاح؟</div>
+                <div class="faq-answer">
+                    يعتمد على التخصص ومدى الازدحام. عادةً يمكنك الحصول على موعد خلال 1-7 أيام. اختر "أقرب موعد" للحصول على أسرع وقت متاح.
+                </div>
+            </div>
+
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <div class="faq-question">❓ هل بياناتي آمنة؟</div>
+                <div class="faq-answer">
+                    بالتأكيد. نستخدم أعلى معايير التشفير والأمان. بياناتك الطبية والشخصية محمية بشكل كامل ولا يمكن الوصول إليها إلا بإذن منك.
+                </div>
+            </div>
+
+            <h3 class="section-subtitle">📅 أسئلة عن الحجز</h3>
+
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <div class="faq-question">❓ هل يمكنني حجز أكثر من موعد في نفس الوقت؟</div>
+                <div class="faq-answer">
+                    نعم، يمكنك حجز عدة مواعيد لتخصصات مختلفة. لكن يفضل أن تكون في أوقات مختلفة لتجنب التعارض.
+                </div>
+            </div>
+
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <div class="faq-question">❓ ماذا لو تأخرت عن موعدي؟</div>
+                <div class="faq-answer">
+                    حاول الحضور في الوقت المحدد. إذا تأخرت:
+                    <ul>
+                        <li>تأخير 10-15 دقيقة: عادة مقبول</li>
+                        <li>أكثر من 15 دقيقة: قد يتم تأخير موعدك أو إلغاؤه</li>
+                        <li>اتصل بالعيادة فوراً إذا كنت ستتأخر</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <div class="faq-question">❓ هل يمكنني نقل موعدي لشخص آخر؟</div>
+                <div class="faq-answer">
+                    لا، الحجز شخصي ومرتبط بحسابك. إذا أردت حجز موعد لشخص آخر، استخدم حسابه أو أنشئ حساب جديد له.
+                </div>
+            </div>
+
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <div class="faq-question">❓ كم مرة يمكنني تعديل أو إلغاء الحجز؟</div>
+                <div class="faq-answer">
+                    يمكنك التعديل أو الإلغاء حتى 12 ساعة قبل الموعد. عدد مرات التعديل غير محدود، لكن الإلغاء المتكرر قد يؤدي لتقييد حسابك.
+                </div>
+            </div>
+
+            <h3 class="section-subtitle">💰 أسئلة عن الدفع</h3>
+
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <div class="faq-question">❓ هل أدفع عند الحجز أم عند الزيارة؟</div>
+                <div class="faq-answer">
+                    الدفع يكون عند الزيارة في مكتب الاستقبال. نظام الحجز لا يتطلب دفع مسبق.
+                </div>
+            </div>
+
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <div class="faq-question">❓ هل هناك غرامة على الإلغاء؟</div>
+                <div class="faq-answer">
+                    الإلغاء مجاني حتى 12 ساعة قبل الموعد. بعد ذلك:
+                    <ul>
+                        <li>من 6-12 ساعة: غرامة 50 ريال</li>
+                        <li>أقل من 6 ساعات: غرامة 100 ريال</li>
+                        <li>عدم الحضور دون إلغاء: كامل رسوم الكشف</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <div class="faq-question">❓ هل تقبلون التأمين الطبي؟</div>
+                <div class="faq-answer">
+                    نعم، نتعامل مع معظم شركات التأمين. عند الحجز، اختر "لدي تأمين" وأدخل بيانات بطاقة التأمين. تأكد من إحضار البطاقة عند الزيارة.
+                </div>
+            </div>
+
+            <h3 class="section-subtitle">🔧 أسئلة تقنية</h3>
+
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <div class="faq-question">❓ ما هي المتصفحات المدعومة؟</div>
+                <div class="faq-answer">
+                    النظام يعمل على جميع المتصفحات الحديثة:
+                    <ul>
+                        <li>✅ Google Chrome (موصى به)</li>
+                        <li>✅ Mozilla Firefox</li>
+                        <li>✅ Safari</li>
+                        <li>✅ Microsoft Edge</li>
+                    </ul>
+                    يُفضل استخدام أحدث إصدار للحصول على أفضل تجربة.
+                </div>
+            </div>
+
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <div class="faq-question">❓ هل يوجد تطبيق للموبايل؟</div>
+                <div class="faq-answer">
+                    النظام متوفر كموقع ويب متجاوب يعمل ممتاز على الموبايل. تطبيق الموبايل قيد التطوير وسيكون متاح قريباً على App Store و Google Play.
+                </div>
+            </div>
+
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <div class="faq-question">❓ كيف أحدّث بياناتي الشخصية؟</div>
+                <div class="faq-answer">
+                    من حسابك:
+                    <ol>
+                        <li>اضغط على اسمك في أعلى الصفحة</li>
+                        <li>اختر "الملف الشخصي"</li>
+                        <li>اضغط "تعديل البيانات"</li>
+                        <li>عدّل ما تريد واضغط "حفظ"</li>
+                    </ol>
+                </div>
+            </div>
+
+            <div class="alert alert-success">
+                <strong>❓ لم تجد إجابة لسؤالك؟</strong><br>
+                تواصل معنا:
+                <ul style="margin: 10px 0 0 20px;">
+                    <li>📞 الهاتف: 0534080555</li>
+                    <li>📧 البريد: support@maysan.sa</li>
+                    <li>💬 الدردشة المباشرة على الموقع</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-title">📞 الدعم الفني</div>
+                    <div class="footer-text">0534080555</div>
+                </div>
+                <div class="footer-section">
+                    <div class="footer-title">🚨 الطوارئ</div>
+                    <div class="footer-text">0540807165</div>
+                </div>
+                <div class="footer-section">
+                    <div class="footer-title">📧 البريد الإلكتروني</div>
+                    <div class="footer-text">support@maysan.sa</div>
+                </div>
+            </div>
+            <div class="footer-copyright">
+                <p style="font-size: 1.2em; margin-bottom: 10px;">💼 <strong>تطوير وتنفيذ</strong></p>
+                <p style="font-size: 1.5em; color: #667eea; font-weight: bold;">شركة ميسان لحلول تقنية المعلومات</p>
+                <p style="margin-top: 15px; color: #999;">© 2024 جميع الحقوق محفوظة | Maysan IT Solutions</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Tab Navigation
+        function showSection(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Remove active class from all tabs
+            document.querySelectorAll('.nav-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Add active class to clicked tab
+            event.target.classList.add('active');
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        
+        // FAQ Toggle
+        function toggleFaq(element) {
+            element.classList.toggle('active');
+        }
+        
+        // Print functionality
+        function printManual() {
+            window.print();
+        }
+        
+        // Smooth scroll for internal links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

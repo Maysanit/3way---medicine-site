@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نظام Clinikio - عرض تقديمي | ميسان لحلول تقنية المعلومات</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: #fff;
+            overflow: hidden;
+        }
+        
+        .presentation-container {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        
+        .slide {
+            display: none;
+            width: 90%;
+            max-width: 1200px;
+            padding: 60px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            color: #333;
+            animation: slideIn 0.5s ease-in-out;
+        }
+        
+        .slide.active {
+            display: block;
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .slide-header {
+            text-align: center;
+            margin-bottom: 40px;
+            border-bottom: 3px solid #f39c12;
+            padding-bottom: 20px;
+        }
+        
+        .slide-title {
+            font-size: 3em;
+            color: #1e3c72;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        
+        .slide-subtitle {
+            font-size: 1.5em;
+            color: #7f8c8d;
+        }
+        
+        .slide-content {
+            font-size: 1.3em;
+            line-height: 1.8;
+        }
+        
+        /* شريحة الغلاف */
+        .cover-slide {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            text-align: center;
+        }
+        
+        .cover-slide .logo {
+            font-size: 5em;
+            margin-bottom: 30px;
+        }
+        
+        .cover-slide h1 {
+            font-size: 4em;
+            margin-bottom: 20px;
+            color: #f39c12;
+        }
+        
+        .cover-slide h2 {
+            font-size: 2.5em;
+            margin-bottom: 40px;
+        }
+        
+        .cover-slide .company {
+            font-size: 1.8em;
+            margin-top: 60px;
+            color: #ecf0f1;
+        }
+        
+        /* قوائم */
+        .content-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .content-list li {
+            padding: 20px;
+            margin: 15px 0;
+            background: linear-gradient(90deg, #f39c12 0%, #e67e22 100%);
+            color: white;
+            border-radius: 10px;
+            font-size: 1.2em;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        
+        .content-list li:hover {
+            transform: translateX(-10px);
+        }
+        
+        .content-list .icon {
+            font-size: 1.5em;
+            margin-left: 15px;
+        }
+        
+        /* الشبكة */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            border-right: 5px solid #f39c12;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+        
+        .card-icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+        }
+        
+        .card-title {
+            font-size: 1.8em;
+            color: #1e3c72;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        
+        .card-text {
+            color: #555;
+            line-height: 1.6;
+        }
+        
+        /* أزرار التنقل */
+        .navigation {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 20px;
+            z-index: 1000;
+        }
+        
+        .nav-btn {
+            background: #f39c12;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(243, 156, 18, 0.4);
+        }
+        
+        .nav-btn:hover {
+            background: #e67e22;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(243, 156, 18, 0.6);
+        }
+        
+        .nav-btn:disabled {
+            background: #95a5a6;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+        
+        .slide-counter {
+            position: fixed;
+            top: 30px;
+            left: 30px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 15px 25px;
+            border-radius: 30px;
+            font-size: 1.2em;
+            z-index: 1000;
+        }
+        
+        /* إحصائيات */
+        .stats-container {
+            display: flex;
+            justify-content: space-around;
+            margin: 40px 0;
+        }
+        
+        .stat-box {
+            text-align: center;
+            padding: 30px;
+            background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
+            color: white;
+            border-radius: 15px;
+            min-width: 200px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .stat-number {
+            font-size: 3em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .stat-label {
+            font-size: 1.2em;
+        }
+        
+        /* جدول المقارنة */
+        .comparison-table {
+            width: 100%;
+            margin: 30px 0;
+            border-collapse: collapse;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .comparison-table th,
+        .comparison-table td {
+            padding: 20px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+        
+        .comparison-table th {
+            background: #1e3c72;
+            color: white;
+            font-size: 1.3em;
+        }
+        
+        .comparison-table tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        .comparison-table .check {
+            color: #27ae60;
+            font-size: 2em;
+        }
+        
+        .comparison-table .cross {
+            color: #e74c3c;
+            font-size: 2em;
+        }
+        
+        /* معلومات الاتصال */
+        .contact-info {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 40px;
+        }
+        
+        .contact-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            min-width: 250px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .contact-icon {
+            font-size: 3em;
+            color: #f39c12;
+            margin-bottom: 15px;
+        }
+        
+        .contact-title {
+            font-size: 1.5em;
+            color: #1e3c72;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        
+        .contact-text {
+            font-size: 1.2em;
+            color: #555;
+            direction: ltr;
+        }
+        
+        /* تايم لاين */
+        .timeline {
+            position: relative;
+            padding: 20px 0;
+        }
+        
+        .timeline-item {
+            padding: 20px 40px;
+            background: white;
+            border-right: 4px solid #f39c12;
+            margin: 20px 0;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .timeline-title {
+            font-size: 1.5em;
+            color: #1e3c72;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .timeline-desc {
+            color: #555;
+            line-height: 1.6;
+        }
+        .other-pg{
+            position: absolute;
+            z-index: 100;
+            top: 30px;
+            right: 30px;
+            background: #f39c12;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(243, 156, 18, 0.4);
+
+        }
+      
+        .other-pg:hover {
+            background: #e67e22;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(243, 156, 18, 0.6);
+        }
+        /* Responsive */
+        @media (max-width: 768px) {
+            .slide {
+                padding: 30px;
+            }
+            
+            .slide-title {
+                font-size: 2em;
+            }
+            
+            .cover-slide h1 {
+                font-size: 2.5em;
+            }
+            
+            .grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats-container {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .contact-info {
+                flex-direction: column;
+                gap: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+ 
+    <a class="other-pg" href="booking_system_manual.html">دليلك الشامل  →</a>
+
+    <div class="presentation-container">
+        <!-- الشريحة 1: الغلاف -->
+        <div class="slide active cover-slide">
+            <div class="logo">🏥</div>
+            <h1>نظام Clinikio</h1>
+            <h2>إدارة ذكية لعيادتك الطبية</h2>
+            <div class="company">
+                💼 تطوير وتنفيذ<br>
+                <strong>شركة ميسان لحلول تقنية المعلومات</strong>
+            </div>
+        </div>
+
+        <!-- الشريحة 2: المشكلة -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">🏥 التحديات في العيادات التقليدية</h2>
+                <p class="slide-subtitle">ما المشاكل التي نواجهها؟</p>
+            </div>
+            <div class="slide-content">
+                <ul class="content-list">
+                    <li><span class="icon">⏰</span> أوقات انتظار طويلة وغير محددة للمرضى</li>
+                    <li><span class="icon">😤</span> فوضى وتزاحم في صالة الانتظار</li>
+                    <li><span class="icon">📝</span> صعوبة تتبع الطابور وإدارة المواعيد</li>
+                    <li><span class="icon">❌</span> عدم وجود نظام أولويات واضح</li>
+                    <li><span class="icon">📊</span> غياب البيانات والتقارير الدقيقة</li>
+                    <li><span class="icon">💸</span> هدر الوقت والموارد الطبية</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- الشريحة 3: الحل -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">💡 الحل الذكي: نظام Clinikio</h2>
+                <p class="slide-subtitle">نظام متكامل لإدارة طوابير المرضى</p>
+            </div>
+            <div class="slide-content">
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>الميزة</th>
+                            <th>قبل Clinikio ❌</th>
+                            <th>مع Clinikio ✅</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>وقت الانتظار</strong></td>
+                            <td>غير محدد وطويل</td>
+                            <td>واضح ومحدد</td>
+                        </tr>
+                        <tr>
+                            <td><strong>إدارة الطابور</strong></td>
+                            <td>يدوية وفوضوية</td>
+                            <td>إلكترونية ومنظمة</td>
+                        </tr>
+                        <tr>
+                            <td><strong>الاستدعاءات</strong></td>
+                            <td>صوتية يدوية</td>
+                            <td>آلية بالصوت والشاشة</td>
+                        </tr>
+                        <tr>
+                            <td><strong>التقارير</strong></td>
+                            <td>غير متوفرة</td>
+                            <td>لحظية ومفصلة</td>
+                        </tr>
+                        <tr>
+                            <td><strong>رضا المرضى</strong></td>
+                            <td>منخفض</td>
+                            <td>مرتفع جداً</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- الشريحة 4: المميزات -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">⚡ المميزات الرئيسية</h2>
+                <p class="slide-subtitle">لماذا تختار Clinikio؟</p>
+            </div>
+            <div class="slide-content">
+                <div class="grid">
+                    <div class="card">
+                        <div class="card-icon">🎫</div>
+                        <h3 class="card-title">تسجيل سريع</h3>
+                        <p class="card-text">إصدار تذاكر إلكترونية فورية مع رقم الدور وبيانات المريض كاملة</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">📺</div>
+                        <h3 class="card-title">شاشة عرض</h3>
+                        <p class="card-text">عرض الطابور الحالي والتالي مع حالات المرضى على شاشة كبيرة</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">🔊</div>
+                        <h3 class="card-title">استدعاء صوتي</h3>
+                        <p class="card-text">إعلانات صوتية تلقائية باللغة العربية عند استدعاء المريض</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">🚨</div>
+                        <h3 class="card-title">أولويات ذكية</h3>
+                        <p class="card-text">نظام أولويات للطوارئ وكبار السن والحالات الخاصة</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">📊</div>
+                        <h3 class="card-title">تقارير تفصيلية</h3>
+                        <p class="card-text">إحصائيات يومية وشهرية عن الأداء وأوقات الانتظار</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">☁️</div>
+                        <h3 class="card-title">سحابي</h3>
+                        <p class="card-text">لا يحتاج خوادم محلية - الوصول من أي مكان بالإنترنت</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- الشريحة 5: الواجهات -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">🖥️ واجهات النظام</h2>
+                <p class="slide-subtitle">تصميم بسيط وسهل الاستخدام</p>
+            </div>
+            <div class="slide-content">
+                <div class="grid">
+                    <div class="card">
+                        <div class="card-icon">🏠</div>
+                        <h3 class="card-title">الصفحة الرئيسية</h3>
+                        <p class="card-text">• عرض الإحصائيات العامة<br>
+                        • التنقل السريع بين الأقسام<br>
+                        • لوحة تحكم شاملة</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">📋</div>
+                        <h3 class="card-title">لوحة الاستقبال</h3>
+                        <p class="card-text">• تسجيل المرضى الجدد<br>
+                        • إصدار التذاكر<br>
+                        • إدارة الطوابير</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">👨‍⚕️</div>
+                        <h3 class="card-title">لوحة الطبيب</h3>
+                        <p class="card-text">• استدعاء المريض التالي<br>
+                        • التحكم في الإعلانات<br>
+                        • إنهاء الفحوصات</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">📺</div>
+                        <h3 class="card-title">شاشة العرض</h3>
+                        <p class="card-text">• عرض الطابور الحالي<br>
+                        • تحديث تلقائي<br>
+                        • واجهة جذابة للمرضى</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- الشريحة 6: الأدوار -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">👥 الأدوار والصلاحيات</h2>
+                <p class="slide-subtitle">نظام محكم لإدارة المستخدمين</p>
+            </div>
+            <div class="slide-content">
+                <div class="grid">
+                    <div class="card">
+                        <div class="card-icon">👔</div>
+                        <h3 class="card-title">موظف الاستقبال</h3>
+                        <p class="card-text">
+                            ✅ تسجيل المرضى<br>
+                            ✅ إصدار التذاكر<br>
+                            ✅ إدارة الطوابير<br>
+                            ✅ طباعة التقارير<br>
+                            ✅ إرسال تنبيهات الطوارئ
+                        </p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">👨‍⚕️</div>
+                        <h3 class="card-title">الطبيب</h3>
+                        <p class="card-text">
+                            ✅ استدعاء المريض التالي<br>
+                            ✅ إدارة الإعلانات الصوتية<br>
+                            ✅ تسجيل انتهاء الفحص<br>
+                            ✅ عرض الإحصائيات<br>
+                            ✅ التحكم في الطابور
+                        </p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">💼</div>
+                        <h3 class="card-title">الإدارة</h3>
+                        <p class="card-text">
+                            ✅ مراجعة التقارير الشاملة<br>
+                            ✅ مراقبة الأداء<br>
+                            ✅ إعداد النظام<br>
+                            ✅ إدارة المستخدمين<br>
+                            ✅ التحليلات المتقدمة
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- الشريحة 7: الفوائد -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">📊 الفوائد والعائد على الاستثمار</h2>
+                <p class="slide-subtitle">نتائج ملموسة وقابلة للقياس</p>
+            </div>
+            <div class="slide-content">
+                <div class="stats-container">
+                    <div class="stat-box">
+                        <div class="stat-number">40%</div>
+                        <div class="stat-label">تقليل وقت الانتظار</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number">30%</div>
+                        <div class="stat-label">زيادة الإنتاجية</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number">95%</div>
+                        <div class="stat-label">رضا المرضى</div>
+                    </div>
+                </div>
+                
+                <ul class="content-list" style="margin-top: 40px;">
+                    <li><span class="icon">💰</span> توفير تكاليف التشغيل والموظفين</li>
+                    <li><span class="icon">⚡</span> تحسين كفاءة سير العمل</li>
+                    <li><span class="icon">😊</span> تحسين تجربة المريض</li>
+                    <li><span class="icon">📈</span> زيادة عدد المرضى المستفيدين</li>
+                    <li><span class="icon">🎯</span> تقليل الأخطاء البشرية</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- الشريحة 8: التنفيذ -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">🛠️ خطة التنفيذ مع ميسان</h2>
+                <p class="slide-subtitle">من الفكرة إلى التشغيل في 3 أسابيع</p>
+            </div>
+            <div class="slide-content">
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-title">📋 الأسبوع الأول: التحليل والإعداد</div>
+                        <div class="timeline-desc">
+                            • زيارة ميدانية للعيادة<br>
+                            • تحليل احتياجاتك الخاصة<br>
+                            • تخصيص النظام حسب متطلباتك<br>
+                            • إعداد قاعدة البيانات
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-title">⚙️ الأسبوع الثاني: التركيب والتكامل</div>
+                        <div class="timeline-desc">
+                            • تركيب الأجهزة والشاشات<br>
+                            • ربط النظام بالإنترنت<br>
+                            • اختبار جميع المميزات<br>
+                            • تدريب مبدئي للفريق
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-title">🎓 الأسبوع الثالث: التدريب والتسليم</div>
+                        <div class="timeline-desc">
+                            • تدريب شامل لجميع المستخدمين<br>
+                            • تشغيل تجريبي تحت الإشراف<br>
+                            • تسليم الوثائق والأدلة<br>
+                            • التشغيل الرسمي 🎉
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card" style="margin-top: 30px; background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%); color: white;">
+                    <h3 style="font-size: 1.8em; margin-bottom: 15px;">✨ ما بعد التشغيل:</h3>
+                    <p style="font-size: 1.2em; line-height: 1.8;">
+                        🔧 دعم فني كامل 24/7<br>
+                        📚 تحديثات مجانية<br>
+                        🎯 تطوير مستمر<br>
+                        📞 استشارات فنية دائمة
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- الشريحة 9: الاتصال -->
+        <div class="slide cover-slide">
+            <div class="slide-header" style="border: none;">
+                <h2 class="slide-title" style="color: #f39c12;">📞 تواصل معنا الآن</h2>
+                <p class="slide-subtitle" style="color: white;">شركة ميسان لحلول تقنية المعلومات</p>
+            </div>
+            <div class="slide-content">
+                <div class="contact-info">
+                    <div class="contact-card">
+                        <div class="contact-icon">📞</div>
+                        <div class="contact-title">الدعم الفني</div>
+                        <div class="contact-text">0534080555</div>
+                    </div>
+                    <div class="contact-card">
+                        <div class="contact-icon">🚨</div>
+                        <div class="contact-title">الطوارئ</div>
+                        <div class="contact-text">0540807165</div>
+                    </div>
+                    <div class="contact-card">
+                        <div class="contact-icon">💼</div>
+                        <div class="contact-title">المبيعات</div>
+                        <div class="contact-text">info@maysan.sa</div>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 60px; font-size: 1.5em; text-align: center; color: white;">
+                    <p>🌟 <strong>نفخر بخدمتكم</strong> 🌟</p>
+                    <p style="margin-top: 20px; font-size: 1.2em;">
+                        ✨ ميسان لحلول تقنية المعلومات ✨<br>
+                        <span style="color: #f39c12;">حلول تقنية متكاملة للقطاع الصحي</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- عداد الشرائح -->
+    <div class="slide-counter">
+        <span id="currentSlide">1</span> / <span id="totalSlides">9</span>
+    </div>
+
+    <!-- أزرار التنقل -->
+    <div class="navigation">
+        <button class="nav-btn" id="prevBtn" onclick="changeSlide(-1)">← السابق</button>
+        <button class="nav-btn" id="nextBtn" onclick="changeSlide(1)">التالي →</button>
+    </div>
+
+    <script>
+        let currentSlideIndex = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        
+        function showSlide(index) {
+            // إخفاء جميع الشرائح
+            slides.forEach(slide => slide.classList.remove('active'));
+            
+            // التأكد من البقاء ضمن الحدود
+            if (index >= totalSlides) {
+                currentSlideIndex = totalSlides - 1;
+            } else if (index < 0) {
+                currentSlideIndex = 0;
+            } else {
+                currentSlideIndex = index;
+            }
+            
+            // إظهار الشريحة الحالية
+            slides[currentSlideIndex].classList.add('active');
+            
+            // تحديث العداد
+            document.getElementById('currentSlide').textContent = currentSlideIndex + 1;
+            
+            // تحديث حالة الأزرار
+            document.getElementById('prevBtn').disabled = currentSlideIndex === 0;
+            document.getElementById('nextBtn').disabled = currentSlideIndex === totalSlides - 1;
+        }
+        
+        function changeSlide(direction) {
+            showSlide(currentSlideIndex + direction);
+        }
+        
+        // اختصارات لوحة المفاتيح
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'ArrowRight' || event.key === 'ArrowDown') {
+                changeSlide(1);
+            } else if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') {
+                changeSlide(-1);
+            } else if (event.key === 'Home') {
+                showSlide(0);
+            } else if (event.key === 'End') {
+                showSlide(totalSlides - 1);
+            }
+        });
+        
+        // Initialize
+        document.getElementById('totalSlides').textContent = totalSlides;
+    </script>
+</body>
+</html>
